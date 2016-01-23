@@ -1,6 +1,10 @@
 # Gimel
 
-A/B testing backend using AWS Lambda/API Gateway + Redis
+[a Scaleable A/B testing backend in ~100 lines of code (and for free*)](http://blog.gingerlime.com/2016/a-scaleable-ab-testing-backend-in-100-lines-of-code-and-for-free/)
+
+## What is it?
+
+an A/B testing backend using AWS Lambda/API Gateway + Redis
 
 Key Features:
 
@@ -23,3 +27,7 @@ TODO
   - `gimel.track` - for tracking events from the client
   - `gimel.experiment` - for reporting experiment results for a single experiment
   - `gimel.all` - for reporting all experiment results
+
+## Looking for the frontend in javascript?
+
+Run your own A/B testing framework. Check out [Alephbet](https://github.com/Alephbet/alephbet).
