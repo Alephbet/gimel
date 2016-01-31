@@ -46,14 +46,16 @@ To view (and analyze statistically) the results of the experiments, take a look 
 
 ## Installation
 
-TODO
-
 * update `gimel.py` with your redis settings and save it
 * zip the entire folder and upload to AWS Lambda
 * Plug the 3 main entry points to lambda functions / API Gateway resources:
   - `gimel.track` - for tracking events from the client
   - `gimel.experiment` - for reporting experiment results for a single experiment
   - `gimel.all` - for reporting all experiment results
+
+Watch this screencast for more information
+
+[![Installing Gimel on AWS Lambda Screencast](https://img.youtube.com/vi/FcgKr4OWJpw/0.jpg)](https://www.youtube.com/watch?v=FcgKr4OWJpw&vq=hd1080)
 
 ## Looking for the frontend in javascript?
 
