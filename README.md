@@ -46,7 +46,8 @@ To view (and analyze statistically) the results of the experiments, take a look 
 
 ## Installation
 
-* update `gimel.py` with your redis settings and save it
+* copy `config.json.template` to `config.json`
+* update `config.json` with your redis settings and save it
 * zip the entire folder and upload to AWS Lambda
 * Plug the 3 main entry points to lambda functions / API Gateway resources:
   - `gimel.track` - for tracking events from the client

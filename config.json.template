@@ -1,0 +1,7 @@
+{
+    "redis": {
+        "host": "ENTER YOUR REDIS HOST",
+        "port": 6379,
+        "password": "..."
+    }
+}

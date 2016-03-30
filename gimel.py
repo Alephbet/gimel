@@ -2,12 +2,19 @@ from __future__ import print_function
 import redis
 
 
-# NOTE: Update this method with the connection details for your redis
+# NOTE: Copy config.json.template to config.json and edit with your settings
+def _config():
+    try:
+        with open('config.json') as config_file:
+            return json.load(config_file)
+    except IOError:
+        print('Please check your config.json file!')
+        return {}
+
+
 def _redis():
-    return redis.Redis(
-        host='ENTER YOUR REDIS HOSTNAME',
-        port=6379,
-        password='...')
+    redis_config = _config()['redis']
+    return redis.Redis(**redis_config)
 
 
 def _counter_key(namespace, experiment, goal, variant):
