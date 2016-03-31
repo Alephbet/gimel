@@ -1,19 +1,10 @@
 from __future__ import print_function
 import redis
-
-
-# NOTE: Copy config.json.template to config.json and edit with your settings
-def _config():
-    try:
-        with open('config.json') as config_file:
-            return json.load(config_file)
-    except IOError:
-        print('Please check your config.json file!')
-        return {}
+from config import config
 
 
 def _redis():
-    redis_config = _config()['redis']
+    redis_config = config['redis']
     return redis.Redis(**redis_config)
 
 
