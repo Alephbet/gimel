@@ -3,5 +3,15 @@
         "host": "ENTER YOUR REDIS HOST",
         "port": 6379,
         "password": "..."
+    },
+    "kinesis": {
+        "_comment": "use with gimel-bq.py",
+        "stream": "gimel"
+    },
+    "big_query": {
+        "_comment": "ues with gimel-bq.py ; paste google oauth2 json to json key below",
+        "dataset": "gimel",
+        "table": "events",
+        "json" : {}
     }
 }
