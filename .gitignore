@@ -1,1 +1,6 @@
 config.json
+gimel.zip
+*.pyc
+dist/**
+build/**
+gimel.egg-info/**
