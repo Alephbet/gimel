@@ -11,11 +11,25 @@ Key Features:
 * Highly scalable due to the nature of AWS Lambda
 * High performance and low memory footprint using Redis HyperLogLog
 * Cost Effective
+* Easy deployment using `gimel deploy`. No need to twiddle with AWS.
 
 ## What does Gimel mean?
 
 Gimel (גִּימֵל) is the 3rd letter of the Hebrew Alphabet. The letter (ג) also looks visually similar to the greek Lambda
 (λ).
+
+## Installation / Quick Start
+
+You will need a live instance of redis accessible online from AWS. Then run:
+
+```bash
+$ pip install gimel
+$ gimel configure
+$ gimel deploy
+```
+
+It will automatically configure your AWS Lambda functions, API gateway and produce a JS snippet ready to use
+for tracking your experiments.
 
 ## Architecture
 
@@ -44,23 +58,16 @@ The backend had to take care of a few simple types of requests:
 
 To view (and analyze statistically) the results of the experiments, take a look at a short [snippet](http://codepen.io/anon/pen/OMOevM?editors=001) (~20 lines of coffeescript). It uses the [Abba javascript library](https://github.com/thumbtack/abba) to do the heavy lifting. It's not super-shiny, but should do the trick.
 
-## Installation
+## How does tracking work?
 
-* copy `config.json.template` to `config.json`
-* update `config.json` with your redis settings and save it
-* zip the entire folder and upload to AWS Lambda
-* Plug the 3 main entry points to lambda functions / API Gateway resources:
-  - `gimel.track` - for tracking events from the client
-  - `gimel.experiment` - for reporting experiment results for a single experiment
-  - `gimel.all` - for reporting all experiment results
+Check out [Alephbet](https://github.com/Alephbet/alephbet).
 
-Watch this screencast for more information
+## Command Reference
 
-[![Installing Gimel on AWS Lambda Screencast](https://img.youtube.com/vi/FcgKr4OWJpw/0.jpg)](https://www.youtube.com/watch?v=FcgKr4OWJpw&vq=hd1080)
-
-## Looking for the frontend in javascript?
-
-Run your own A/B testing framework. Check out [Alephbet](https://github.com/Alephbet/alephbet).
+* `gimel --help` - prints a help screen.
+* `gimel configure` - opens your editor so you can edit the config.json file. Use it to update your redis settings.
+* `gimel preflight` - runs preflight checks to make sure you have access to AWS, redis etc.
+* `gimel deploy` - deploys the code and configs to AWS automatically.
 
 ## License
 
