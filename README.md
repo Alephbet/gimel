@@ -13,6 +13,10 @@ Key Features:
 * Cost Effective
 * Easy deployment using `gimel deploy`. No need to twiddle with AWS.
 
+## Looking for contributors
+
+[click here for more info](https://github.com/Alephbet/gimel/issues/2)
+
 ## What does Gimel mean?
 
 Gimel (גִּימֵל) is the 3rd letter of the Hebrew Alphabet. The letter (ג) also looks visually similar to the greek Lambda
