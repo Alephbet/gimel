@@ -1,0 +1,4 @@
+pip-tools
+tox
+nose
+mock
