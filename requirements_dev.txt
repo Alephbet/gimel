@@ -3,3 +3,5 @@ tox
 nose
 mock
 placebo
+check-manifest
+readme_renderer
