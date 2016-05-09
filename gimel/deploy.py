@@ -39,23 +39,23 @@ POLICY = """{
     ]
 }"""
 ASSUMED_ROLE_POLICY = """{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Action": "sts:AssumeRole",
-			"Effect": "Allow",
-			"Principal": {
-				"Service": "lambda.amazonaws.com"
-			}
-		},
-		{
-			"Action": "sts:AssumeRole",
-			"Effect": "Allow",
-			"Principal": {
-				"Service": "apigateway.amazonaws.com"
-			}
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "lambda.amazonaws.com"
+            }
+        },
+        {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "apigateway.amazonaws.com"
+            }
+        }
+    ]
 }"""
 # source: https://aws.amazon.com/blogs/compute/using-api-gateway-mapping-templates-to-handle-changes-in-your-back-end-apis/
 REQUEST_TEMPLATE = {'application/json':
