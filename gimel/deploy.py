@@ -39,23 +39,23 @@ POLICY = """{
     ]
 }"""
 ASSUMED_ROLE_POLICY = """{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Action": "sts:AssumeRole",
-			"Effect": "Allow",
-			"Principal": {
-				"Service": "lambda.amazonaws.com"
-			}
-		},
-		{
-			"Action": "sts:AssumeRole",
-			"Effect": "Allow",
-			"Principal": {
-				"Service": "apigateway.amazonaws.com"
-			}
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "lambda.amazonaws.com"
+            }
+        },
+        {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "apigateway.amazonaws.com"
+            }
+        }
+    ]
 }"""
 # source: https://aws.amazon.com/blogs/compute/using-api-gateway-mapping-templates-to-handle-changes-in-your-back-end-apis/
 REQUEST_TEMPLATE = {'application/json':
@@ -161,7 +161,7 @@ def role():
 
 
 def _cleanup_old_versions(name):
-    logger.info('cleaning up old versions of {}. Keeping {}'.format(
+    logger.info('cleaning up old versions of {0}. Keeping {1}'.format(
         name, REVISIONS))
     versions = _versions(name)
     for version in versions[0:(len(versions) - REVISIONS)]:
@@ -173,7 +173,7 @@ def _cleanup_old_versions(name):
 
 def _function_alias(name, version, alias=LIVE):
     try:
-        logger.info('creating function alias {} for {}:{}'.format(
+        logger.info('creating function alias {0} for {1}:{2}'.format(
             alias, name, version))
         arn = aws_lambda('create_alias',
                          FunctionName=name,
@@ -261,9 +261,9 @@ def resource(api_id, path):
 
 
 def function_uri(function_arn, region):
-    uri = ('arn:aws:apigateway:{}:lambda:path/2015-03-31/functions'
-          '/{}/invocations').format(region, function_arn)
-    logger.debug("uri={}".format(uri))
+    uri = ('arn:aws:apigateway:{0}:lambda:path/2015-03-31/functions'
+          '/{1}/invocations').format(region, function_arn)
+    logger.debug("uri={0}".format(uri))
     return uri
 
 
