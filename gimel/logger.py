@@ -31,7 +31,7 @@ class CustomFormatter(logging.Formatter):
 
 def setup(name=__name__, level=logging.INFO):
     logger = logging.getLogger(name)
-    if len(logger.handlers) > 0:
+    if logger.handlers:
         return logger
     logger.setLevel(level)
     try:
