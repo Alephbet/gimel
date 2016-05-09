@@ -3,4 +3,3 @@ jmespath
 boto3
 click
 redis
-placebo

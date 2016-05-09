@@ -13,7 +13,6 @@ colorama==0.3.3           # via awscli
 docutils==0.12            # via awscli, botocore
 futures==3.0.5            # via boto3, s3transfer
 jmespath==0.9.0
-placebo==0.8.1
 pyasn1==0.1.9             # via rsa
 python-dateutil==2.5.3    # via botocore
 redis==2.10.5

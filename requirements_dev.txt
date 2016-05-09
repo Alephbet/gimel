@@ -2,3 +2,4 @@ pip-tools
 tox
 nose
 mock
+placebo
