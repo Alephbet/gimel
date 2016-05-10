@@ -2,5 +2,9 @@ include README.md
 include LICENSE
 include gimel/VERSION
 include gimel/config.json.template
-include requirements.txt
 recursive-include gimel/vendor *
+
+exclude tox.ini
+exclude requirements.in
+exclude requirements.txt
+exclude requirements_dev.txt
