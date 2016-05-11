@@ -1,5 +1,6 @@
 # Gimel
 
+[![Build Status](https://travis-ci.org/Alephbet/gimel.svg?branch=master)](https://travis-ci.org/Alephbet/gimel)
 [![PyPI](https://img.shields.io/pypi/v/gimel.svg)](https://pypi.python.org/pypi/gimel)
 
 [a Scaleable A/B testing backend in ~100 lines of code (and for free*)](http://blog.gingerlime.com/2016/a-scaleable-ab-testing-backend-in-100-lines-of-code-and-for-free/)
