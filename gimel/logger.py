@@ -35,7 +35,8 @@ def setup(name=__name__, level=logging.INFO):
         return logger
     logger.setLevel(level)
     try:
-        import click
+        # check if click exists to swap the logger
+        import click  # noqa
         formatter = ColorFormatter('[.] %(message)s')
     except ImportError:
         formatter = CustomFormatter('[.] %(message)s')

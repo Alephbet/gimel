@@ -4,3 +4,7 @@ gimel.zip
 dist/**
 build/**
 gimel.egg-info/**
+
+.idea/
+*.iml
+.tox/

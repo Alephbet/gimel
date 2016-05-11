@@ -3,3 +3,8 @@ tox
 nose
 mock
 placebo
+check-manifest
+readme_renderer
+
+# md to rst for pypi
+pypandoc

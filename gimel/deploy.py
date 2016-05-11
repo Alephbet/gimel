@@ -57,7 +57,7 @@ ASSUMED_ROLE_POLICY = """{
         }
     ]
 }"""
-# source: https://aws.amazon.com/blogs/compute/using-api-gateway-mapping-templates-to-handle-changes-in-your-back-end-apis/
+# source: https://aws.amazon.com/blogs/compute/using-api-gateway-mapping-templates-to-handle-changes-in-your-back-end-apis/  # noqa
 REQUEST_TEMPLATE = {'application/json':
     """{
         #set($queryMap = $input.params().querystring)
@@ -66,8 +66,7 @@ REQUEST_TEMPLATE = {'application/json':
             #if($foreach.hasNext),#end
         #end
        }
-    """
-}
+    """}
 
 WIRING = [
     {
@@ -299,7 +298,7 @@ def cors(api_id, resource_id):
                responseParameters={
                    "method.response.header.Access-Control-Allow-Origin": "'*'",
                    "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
-                   "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"},
+                   "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"},  # noqa
                responseTemplates={'application/json': ''})
 
 
@@ -393,34 +392,34 @@ def js_code_snippet():
     endpoint = TRACK_ENDPOINT
     logger.info('AlephBet JS code snippet:')
     logger.info(
-    """
+        """
 
-    <!-- Copy and paste this snippet to start tracking with gimel -->
+        <!-- Copy and paste this snippet to start tracking with gimel -->
 
-    <script src="https://bowercdn.net/c/alephbet-0.12.0/dist/alephbet.min.js"></script>
-    <script>
+        <script src="https://bowercdn.net/c/alephbet-0.12.0/dist/alephbet.min.js"></script>
+        <script>
 
-    // * javascript code snippet to track experiments with AlephBet *
-    // * For more information: https://github.com/Alephbet/alephbet *
+        // * javascript code snippet to track experiments with AlephBet *
+        // * For more information: https://github.com/Alephbet/alephbet *
 
-    track_url = 'https://%(api_id)s.execute-api.%(api_region)s.amazonaws.com/prod/%(endpoint)s';
-    namespace = 'alephbet';
+        track_url = 'https://%(api_id)s.execute-api.%(api_region)s.amazonaws.com/prod/%(endpoint)s';
+        namespace = 'alephbet';
 
-    experiment = new AlephBet.Experiment({
-        name: 'my a/b test',
-        tracking_adapter: new AlephBet.Gimel(track_url, namespace),
-        // trigger: function() { ... },  // optional trigger
-        variants: {
-            'red': function() {
-                // add your code here
-            },
-            'blue': function() {
-                // add your code here
+        experiment = new AlephBet.Experiment({
+            name: 'my a/b test',
+            tracking_adapter: new AlephBet.Gimel(track_url, namespace),
+            // trigger: function() { ... },  // optional trigger
+            variants: {
+                'red': function() {
+                    // add your code here
+                },
+                'blue': function() {
+                    // add your code here
+                }
             }
-        }
-    });
-    </script>
-    """ % locals()
+        });
+        </script>
+        """ % locals()
     )
 
 
