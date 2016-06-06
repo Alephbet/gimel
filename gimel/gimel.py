@@ -102,3 +102,35 @@ def track(event, context):
     pipe.sadd('{0}:{1}:counter_keys'.format(namespace, experiment), key)
     pipe.pfadd(key, uuid)
     pipe.execute()
+
+
+def delete(event, context):
+    """ delete an experiment
+        params:
+            - experiment - name of the experiment
+            - namespace
+    """
+
+    r = _redis()
+    namespace = event.get('namespace', 'alephbet')
+    experiment = event['experiment']
+    experiments_set_key = '{0}:experiments'.format(namespace)
+    experiment_counters_set_key = '{0}:{1}:counter_keys'.format(namespace, experiment)
+    all_counters_set_key = '{0}:counter_keys'.format(namespace)
+
+    if r.sismember(experiments_set_key, experiment):
+        counter_keys = r.smembers(
+            experiment_counters_set_key
+        )
+        pipe = r.pipeline()
+        for key in counter_keys:
+            pipe.srem(all_counters_set_key, key)
+            pipe.delete(key)
+        pipe.delete(
+            experiment_counters_set_key
+        )
+        pipe.srem(
+            experiments_set_key,
+            experiment
+        )
+        pipe.execute()

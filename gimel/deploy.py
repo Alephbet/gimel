@@ -109,6 +109,25 @@ WIRING = [
                 }
             }
         }
+    },
+    {
+        "lambda": {
+            "FunctionName": "gimel-delete-experiment",
+            "Handler": "gimel.delete",
+            "MemorySize": 128,
+            "Timeout": 3
+        },
+        "api_gateway": {
+            "pathPart": "delete",
+            "method": {
+                "httpMethod": "GET",
+                "apiKeyRequired": True,
+                "requestParameters": {
+                    "method.request.querystring.namespace": False,
+                    "method.request.querystring.experiment": False,
+                }
+            }
+        }
     }
 ]
 
