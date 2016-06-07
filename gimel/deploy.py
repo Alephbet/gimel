@@ -119,7 +119,7 @@ WIRING = [
         "api_gateway": {
             "pathPart": "delete",
             "method": {
-                "httpMethod": "GET",
+                "httpMethod": "DELETE",
                 "apiKeyRequired": True,
                 "requestParameters": {
                     "method.request.querystring.namespace": False,
@@ -332,24 +332,25 @@ def deploy_api(api_id):
 
 
 def api_method(api_id, resource_id, role_arn, function_uri, wiring):
-    _clear_method(api_id, resource_id, 'GET')
+    http_method = wiring['method']['httpMethod']
+    _clear_method(api_id, resource_id, http_method)
     apigateway('put_method', restApiId=api_id, resourceId=resource_id,
                authorizationType='NONE',
                **wiring['method'])
     apigateway('put_integration', restApiId=api_id, resourceId=resource_id,
-               httpMethod='GET', type='AWS', integrationHttpMethod='POST',
+               httpMethod=http_method, type='AWS', integrationHttpMethod='POST',
                credentials=role_arn,
                uri=function_uri,
                requestTemplates=REQUEST_TEMPLATE)
     apigateway('put_method_response', restApiId=api_id, resourceId=resource_id,
-               httpMethod='GET', statusCode='200',
+               httpMethod=http_method, statusCode='200',
                responseParameters={
                    "method.response.header.Access-Control-Allow-Origin": False,
                    "method.response.header.Pragma": False,
                    "method.response.header.Cache-Control": False},
                responseModels={'application/json': 'Empty'})
     apigateway('put_integration_response', restApiId=api_id,
-               resourceId=resource_id, httpMethod='GET', statusCode='200',
+               resourceId=resource_id, httpMethod=http_method, statusCode='200',
                responseParameters={
                    "method.response.header.Access-Control-Allow-Origin": "'*'",
                    "method.response.header.Pragma": "'no-cache'",
