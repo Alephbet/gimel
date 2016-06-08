@@ -1,10 +1,6 @@
 sudo: false
 language: python
 
-addons:
-  apt_packages:
-    - pandoc
-
 matrix:
     include:
         - python: 3.5
