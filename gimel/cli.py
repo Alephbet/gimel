@@ -1,7 +1,7 @@
 import click
 import logging
 import logger
-from deploy import run, js_code_snippet, preflight_checks
+from deploy import run, js_code_snippet, preflight_checks, dashboard_url
 
 logger = logger.setup()
 
@@ -38,6 +38,13 @@ def configure():
         logger.info('generating new config {}'.format(config_filename))
         generate_config(config_filename)
     click.edit(filename=config_filename)
+
+
+@cli.command()
+@click.option('--namespace', default='alephbet')
+def dashboard(namespace):
+    click.launch(dashboard_url(namespace))
+
 
 if __name__ == '__main__':
     cli()

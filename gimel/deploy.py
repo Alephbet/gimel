@@ -10,6 +10,7 @@ logger = logger.setup()
 LIVE = 'live'
 REVISIONS = 5
 TRACK_ENDPOINT = 'track'
+EXPERIMENTS_ENDPOINT = 'experiments'
 POLICY = """{
     "Version": "2012-10-17",
     "Statement": [
@@ -99,7 +100,7 @@ WIRING = [
             "Timeout": 3
         },
         "api_gateway": {
-            "pathPart": "experiments",
+            "pathPart": EXPERIMENTS_ENDPOINT,
             "method": {
                 "httpMethod": "GET",
                 "apiKeyRequired": True,
@@ -252,9 +253,13 @@ def get_create_api():
     return api_id
 
 
+def get_api_key():
+    return apigateway('get_api_keys',
+                      query='items[?name==`gimel`] | [0].id')
+
+
 def api_key(api_id):
-    key = apigateway('get_api_keys',
-                     query='items[?name==`gimel`] | [0].id')
+    key = get_api_key()
     if key:
         apigateway('update_api_key', apiKey=key,
                    patchOperations=[{'op': 'add', 'path': '/stages',
@@ -416,7 +421,7 @@ def js_code_snippet():
 
         <!-- Copy and paste this snippet to start tracking with gimel -->
 
-        <script src="https://bowercdn.net/c/alephbet-0.12.0/dist/alephbet.min.js"></script>
+        <script src="https://bowercdn.net/c/alephbet-0.13.0/dist/alephbet.min.js"></script>
         <script>
 
         // * javascript code snippet to track experiments with AlephBet *
@@ -441,6 +446,18 @@ def js_code_snippet():
         </script>
         """ % locals()
     )
+
+
+def dashboard_url(namespace='alephbet'):
+    api_id = get_create_api()
+    api_region = region()
+    endpoint = EXPERIMENTS_ENDPOINT
+    experiments_url = 'https://{}.execute-api.{}.amazonaws.com/prod/{}'.format(
+        api_id, api_region, endpoint)
+    return ('https://fiddle.jshell.net/7016544n/?experiment_url={}'
+            '&api_key={}&namespace={}').format(experiments_url,
+                                               get_api_key(),
+                                               namespace)
 
 
 def preflight_checks():
