@@ -35,6 +35,8 @@ $ gimel configure
 $ gimel deploy
 ```
 
+![](https://s3.amazonaws.com/gingerlime-images/gimel-deploy.gif "gimel deploy")
+
 It will automatically configure your AWS Lambda functions, API gateway and produce a JS snippet ready to use
 for tracking your experiments.
 
@@ -63,7 +65,9 @@ The backend had to take care of a few simple types of requests:
 
 ### Dashboard
 
-To view (and analyze statistically) the results of the experiments, take a look at a short [snippet](http://codepen.io/anon/pen/OMOevM?editors=001) (~20 lines of coffeescript). It uses the [Abba javascript library](https://github.com/thumbtack/abba) to do the heavy lifting. It's not super-shiny, but should do the trick.
+New! access your dashboard with `gimel dashboard`
+
+![](https://s3.amazonaws.com/gingerlime-images/gimel-dashboard.gif "gimel dashboard")
 
 ## How does tracking work?
 
