@@ -421,7 +421,7 @@ def js_code_snippet():
 
         <!-- Copy and paste this snippet to start tracking with gimel -->
 
-        <script src="https://bowercdn.net/c/alephbet-0.13.0/dist/alephbet.min.js"></script>
+        <script src="https://unpkg.com/alephbet/dist/alephbet.min.js"></script>
         <script>
 
         // * javascript code snippet to track experiments with AlephBet *
