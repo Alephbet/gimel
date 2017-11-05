@@ -454,7 +454,7 @@ def dashboard_url(namespace='alephbet'):
     endpoint = EXPERIMENTS_ENDPOINT
     experiments_url = 'https://{}.execute-api.{}.amazonaws.com/prod/{}'.format(
         api_id, api_region, endpoint)
-    return ('https://fiddle.jshell.net/x9gr2xst/?experiment_url={}'
+    return ('https://codepen.io/anon/pen/LOGGZj/?experiment_url={}'
             '&api_key={}&namespace={}').format(experiments_url,
                                                get_api_key(),
                                                namespace)
