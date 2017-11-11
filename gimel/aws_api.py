@@ -30,6 +30,7 @@ def check_aws_credentials():
     session.get_credentials().access_key
     session.get_credentials().secret_key
 
+
 iam = partial(aws, 'iam')
 aws_lambda = partial(aws, 'lambda')
 apigateway = partial(aws, 'apigateway')

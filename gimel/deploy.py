@@ -2,6 +2,7 @@ from __future__ import print_function
 import logger
 from botocore.client import ClientError
 import os
+import redis
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 from aws_api import iam, apigateway, aws_lambda, region, check_aws_credentials
 
@@ -230,12 +231,12 @@ def rollback_lambda(name, alias=LIVE):
     try:
         live_index = all_versions.index(live_version)
         if live_index < 1:
-            raise
+            raise RuntimeError('Cannot find previous version')
         prev_version = all_versions[live_index - 1]
         logger.info('rolling back to version {}'.format(prev_version))
         _function_alias(name, prev_version)
-    except:
-        logger.error('Unable to rollback. Cannot find previous version')
+    except RuntimeError as error:
+        logger.error('Unable to rollback. {}'.format(repr(error)))
 
 
 def rollback(alias=LIVE):
@@ -474,7 +475,7 @@ def preflight_checks():
     try:
         from gimel import _redis
         _redis().ping()
-    except:
+    except redis.exceptions.ConnectionError:
         logger.error('Redis ping failed. Please run gimel configure')
         return False
     return True
@@ -496,5 +497,5 @@ if __name__ == '__main__':
         preflight_checks()
         run()
         js_code_snippet()
-    except:
+    except Exception:
         logger.error('preflight checks failed')
