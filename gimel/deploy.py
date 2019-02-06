@@ -98,7 +98,7 @@ WIRING = [
             "FunctionName": "gimel-all-experiments",
             "Handler": "gimel.all",
             "MemorySize": 128,
-            "Timeout": 3
+            "Timeout": 60
         },
         "api_gateway": {
             "pathPart": EXPERIMENTS_ENDPOINT,
@@ -116,7 +116,7 @@ WIRING = [
             "FunctionName": "gimel-delete-experiment",
             "Handler": "gimel.delete",
             "MemorySize": 128,
-            "Timeout": 3
+            "Timeout": 30
         },
         "api_gateway": {
             "pathPart": "delete",
