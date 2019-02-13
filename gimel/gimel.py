@@ -67,11 +67,17 @@ def all(event, context):
     """ retrieves all experiment results from redis
         params:
             - namespace (optional)
+            - scope (optional, comma-separated list of experiments)
     """
     r = _redis()
     namespace = event.get('namespace', 'alephbet')
-    experiments = r.smembers("{0}:experiments".format(namespace))
+    scope = event.get('scope')
+    if scope:
+        experiments = scope.split(',')
+    else:
+        experiments = r.smembers("{0}:experiments".format(namespace))
     results = []
+    results.append({'meta': {'scope': scope}})
     for ex in experiments:
         goals = experiment({'experiment': ex, 'namespace': namespace}, context)
         results.append({'experiment': ex, 'goals': goals})
