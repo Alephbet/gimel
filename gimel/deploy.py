@@ -106,7 +106,8 @@ WIRING = [
                 "httpMethod": "GET",
                 "apiKeyRequired": True,
                 "requestParameters": {
-                    "method.request.querystring.namespace": False
+                    "method.request.querystring.namespace": False,
+                    "method.request.querystring.scope": False
                 }
             }
         }
@@ -391,6 +392,13 @@ def create_update_lambda(role_arn, wiring):
                                                query='[FunctionArn, Version]')
     else:
         logger.info('updating lambda function {}'.format(name))
+        aws_lambda('update_function_configuration',
+                   FunctionName=name,
+                   Runtime='python2.7',
+                   Role=role_arn,
+                   Handler=handler,
+                   MemorySize=memory,
+                   Timeout=timeout)
         with open('gimel.zip', 'rb') as zf:
             function_arn, version = aws_lambda('update_function_code',
                                                FunctionName=name,
