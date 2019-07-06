@@ -1,7 +1,13 @@
 import click
 import logging
-import logger
-from deploy import run, js_code_snippet, preflight_checks, dashboard_url
+try:
+    from gimel import logger
+    from gimel.deploy import run, js_code_snippet, preflight_checks, dashboard_url
+    from gimel.config import config, config_filename, generate_config
+except ImportError:
+    import logger
+    from deploy import run, js_code_snippet, preflight_checks, dashboard_url
+    from config import config, config_filename, generate_config
 
 logger = logger.setup()
 
@@ -33,7 +39,6 @@ def deploy(preflight):
 
 @cli.command()
 def configure():
-    from config import config, config_filename, generate_config
     if not config:
         logger.info('generating new config {}'.format(config_filename))
         generate_config(config_filename)

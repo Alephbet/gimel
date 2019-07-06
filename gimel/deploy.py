@@ -1,10 +1,19 @@
 from __future__ import print_function
-import logger
 from botocore.client import ClientError
 import os
 import redis
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from aws_api import iam, apigateway, aws_lambda, region, check_aws_credentials
+try:
+    from gimel import logger
+    from gimel.gimel import _redis
+    from gimel.config import config
+    from gimel.aws_api import iam, apigateway, aws_lambda, region, check_aws_credentials
+except ImportError:
+    import logger
+    from gimel import _redis
+    from config import config
+    from aws_api import iam, apigateway, aws_lambda, region, check_aws_credentials
+
 
 
 logger = logger.setup()
@@ -136,7 +145,6 @@ WIRING = [
 
 def prepare_zip():
     from pkg_resources import resource_filename as resource
-    from config import config
     from json import dumps
     logger.info('creating/updating gimel.zip')
     with ZipFile('gimel.zip', 'w', ZIP_DEFLATED) as zipf:
@@ -481,7 +489,6 @@ def preflight_checks():
         return False
     logger.info('testing redis')
     try:
-        from gimel import _redis
         _redis().ping()
     except redis.exceptions.ConnectionError:
         logger.error('Redis ping failed. Please run gimel configure')

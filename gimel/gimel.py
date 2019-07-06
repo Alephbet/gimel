@@ -2,7 +2,10 @@ from __future__ import print_function
 import sys
 sys.path.insert(0, './vendor')
 import redis
-from config import config
+try:
+    from gimel.config import config
+except ImportError:
+    from config import config
 
 
 def _redis():

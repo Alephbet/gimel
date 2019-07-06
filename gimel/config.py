@@ -1,8 +1,11 @@
 from __future__ import print_function
-import logger
 from os.path import expanduser, realpath
 import os
 import json
+try:
+    from gimel import logger
+except ImportError:
+    import logger
 
 logger = logger.setup()
 
