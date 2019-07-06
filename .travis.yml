@@ -3,9 +3,9 @@ language: python
 
 matrix:
     include:
-        - python: 3.5
+        - python: 3.7
           env: TOXENV=packaging
-        - python: 3.5
+        - python: 3.7
           env: TOXENV=py3-pep8
         - python: 2.7
           env: TOXENV=py2-pep8
