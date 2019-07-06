@@ -33,12 +33,12 @@ def load_config():
 
 
 def _create_file(config_filename):
-        dirname = os.path.split(config_filename)[0]
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
-        with os.fdopen(os.open(config_filename,
-                               os.O_WRONLY | os.O_CREAT, 0o600), 'w'):
-            pass
+    dirname = os.path.split(config_filename)[0]
+    if not os.path.isdir(dirname):
+        os.makedirs(dirname)
+    with os.fdopen(os.open(config_filename,
+                           os.O_WRONLY | os.O_CREAT, 0o600), 'w'):
+        pass
 
 
 def _config_template():

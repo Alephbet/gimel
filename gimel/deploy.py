@@ -15,7 +15,6 @@ except ImportError:
     from aws_api import iam, apigateway, aws_lambda, region, check_aws_credentials
 
 
-
 logger = logger.setup()
 LIVE = 'live'
 REVISIONS = 5
