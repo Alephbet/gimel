@@ -447,17 +447,21 @@ def js_code_snippet():
         namespace = 'alephbet';
 
         experiment = new AlephBet.Experiment({
-            name: 'my a/b test',
-            tracking_adapter: new AlephBet.Gimel(track_url, namespace),
-            // trigger: function() { ... },  // optional trigger
-            variants: {
-                'red': function() {
-                    // add your code here
-                },
-                'blue': function() {
-                    // add your code here
-                }
+          name: "my a/b test",
+          tracking_adapter: new AlephBet.GimelAdapter(track_url, namespace),
+          // trigger: function() { ... },  // optional trigger
+          variants: {
+            red: {
+              activate: function() {
+                // add your code here
+              }
+            },
+            blue: {
+              activate: function() {
+                // add your code here
+              }
             }
+          }
         });
         </script>
         """ % locals()
