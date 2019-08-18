@@ -503,7 +503,7 @@ def run():
     prepare_zip()
     api_id = get_create_api()
     role_arn = role()
-    for component in WIRING:
+    for component in WIRING + config.get("extra_wiring", []):
         function_arn = create_update_lambda(role_arn, component['lambda'])
         create_update_api(role_arn, function_arn, component['api_gateway'])
     deploy_api(api_id)

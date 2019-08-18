@@ -80,6 +80,62 @@ Check out [Alephbet](https://github.com/Alephbet/alephbet).
 * `gimel preflight` - runs preflight checks to make sure you have access to AWS, redis etc.
 * `gimel deploy` - deploys the code and configs to AWS automatically.
 
+## Advanced
+
+### custom API endpoints
+
+If you want to use different API endpoints, you can add your own `extra_wiring` into the `config.json` file (e.g. using
+`gimel configure`).
+
+for example, this will add a `.../prod/my_tracking_endpoint` URL pointing to the `gimel-track` lambda:
+
+```json
+{
+    "redis": {
+       ...
+    },
+    "extra_wiring": [
+        {
+            "lambda": {
+                "FunctionName": "gimel-track",
+                "Handler": "gimel.track",
+                "MemorySize": 128,
+                "Timeout": 3
+            },
+            "api_gateway": {
+                "pathPart": "my_tracking_endpoint",
+                "method": {
+                    "httpMethod": "GET",
+                    "apiKeyRequired": false,
+                    "requestParameters": {
+                        "method.request.querystring.namespace": false,
+                        "method.request.querystring.experiment": false,
+                        "method.request.querystring.variant": false,
+                        "method.request.querystring.event": false,
+                        "method.request.querystring.uuid": false
+                    }
+                }
+            }
+        }
+    ]
+}
+```
+
+see [WIRING](https://github.com/Alephbet/gimel/blob/52830737835119692f3a3c157fe090adabf58150/gimel/deploy.py#L81)
+
+## Privacy, Ad-blockers (GDPR etc)
+
+Gimel provides a backend for A/B test experiment data. This data is aggregated and does *not* contain any personal information at all. It merely stores the total number of actions with a certain variation against another.
+
+As such, Gimel should meet privacy requirements of GDPR and similar privacy regulations.
+
+Nevertheless, important disclaimers:
+
+* I am not a lawyer, and it's entirely up to you if and how you decide to use Gimel. Please check with your local regulations and get legal advice to decide on your own.
+* Some ad-blockers are extra vigilent, and would block requests with the `track` keyword in the URL. Therefore, track requests to Gimel might be blocked by default. As the library author, I make no attempts to conceal the fact that a form of tracking is necessary to run A/B tests, even if I believe it to be respecting privacy.
+* Users who decide to use Gimel can, if they wish, assign a different endpoint that might get past ad-blockers, but that's entirely up to them. see [custom API endpoints](#custom-api-endpoints) on how this can be achieved.
+* As with almost any tool, it can be use for good or evil. Some A/B tests can be seen as manipulative, unfair or otherwise illegitimate. Again, use your own moral compass to decide whether or not it's ok to use A/B testing, or specific A/B tests.
+
 ## License
 
 Gimel is distributed under the MIT license. All 3rd party libraries and components are distributed under their
