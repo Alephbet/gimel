@@ -10,6 +10,8 @@ except ImportError:
 
 def _redis():
     redis_config = config['redis']
+    redis_config["charset"] = "utf-8"
+    redis_config["decode_responses"] = True
     return redis.Redis(**redis_config)
 
 
