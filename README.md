@@ -56,6 +56,8 @@ The data store keeps a tally of each event that comes into the system. Being abl
 
 In terms of storage space, redis HyperLogLog offers a fixed size of 12k per counter. This gives us ample space for storing experiment data with low memory footprint.
 
+**NOTE**: there's no free lunch. HLL isn't as accurate, especially with large experiments. [See here](https://github.com/Alephbet/gimel/issues/15) or check out [lamed](https://github.com/Alephbet/lamed) if you're looking for a more accurate, but more memory-hungry option.
+
 ### Backend - AWS Lambda / API Gateway
 
 The backend had to take care of a few simple types of requests:
