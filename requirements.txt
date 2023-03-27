@@ -4,18 +4,37 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-
 awscli==1.10.21
+    # via -r requirements.in
 boto3==1.3.0
-botocore==1.4.12          # via awscli, boto3, s3transfer
+    # via -r requirements.in
+botocore==1.4.12
+    # via
+    #   awscli
+    #   boto3
+    #   s3transfer
 click==6.6
-colorama==0.3.3           # via awscli
-docutils==0.12            # via awscli, botocore
-futures==3.0.5            # via boto3, s3transfer
+    # via -r requirements.in
+colorama==0.3.3
+    # via awscli
+docutils==0.12
+    # via
+    #   awscli
+    #   botocore
 jmespath==0.9.0
-pyasn1==0.1.9             # via rsa
-python-dateutil==2.5.3    # via botocore
-redis==2.10.5
-rsa==3.3                  # via awscli
-s3transfer==0.0.1         # via awscli
-six==1.10.0               # via python-dateutil
+    # via
+    #   -r requirements.in
+    #   boto3
+    #   botocore
+pyasn1==0.1.9
+    # via rsa
+python-dateutil==2.5.3
+    # via botocore
+redis==4.5.3
+    # via -r requirements.in
+rsa==3.3
+    # via awscli
+s3transfer==0.0.1
+    # via awscli
+six==1.10.0
+    # via python-dateutil
